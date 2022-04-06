@@ -1,0 +1,106 @@
+C00A 000 	jmp 	start	skip around the variables
+000A 001 size			size of the array (10)
+0000 002 i 			iterator i
+0000 003 j 			iterator j
+3000 004 loadit		load instruction
+4000 005 storeit 		store instruction
+0000 006 num 			number in array holder
+0001 007 one			constant 1
+0000 008 zero 			constant 0
+0070 009 base			base address at 70
+B000 00A 
+B000 00B
+B000 00C
+B000 00D
+B000 00E
+1000 00F start	readH		read numbers in array
+4006 010 	store	num 	stores the number into num
+3005 011	load	storeit loads the storeit in the accumulator
+5009 012    	add 	base 	adds the base to the storeit   
+5002 013	add 	i 	adds i
+4016 014 	store 		plants the store instruction 016
+3006 015 	load 	num	loads num
+0000 016 doit 			stores num at the storeit address
+3002 017 	load 	i 	loads i
+5007 018 	add 	one 	add one to i
+4002 019 	store 	i 	store i+1 to i
+6001 01A 	sub	size 	sub size from i
+E00F 01B jmp 		loop 	goto 00F and read in next number
+B000 01C
+B000 01D
+B000 01E
+3008 01F 	load 	zero 	loads zero
+4002 020 	store 	i 	stores i as 0
+C027 021 jmp 			i should start at 0 so skip the first i++
+3002 022 iLoop	load 	i 	start of i loop
+5007 023 	add 	one 	add one to i //i should start at 0
+4002 024 	store 	i 	store i
+6001 025 	sub 	size 	i-size
+D089 026 exit			FINISH THIS LINE LATER (EXIT TO END)
+3001 027 	load 	size 	loads size
+6007 028 	sub 	one 	subtract one from size
+4003 029 	store 	j 	store size-1 into j
+3009 02A jLoop	load 	base 	loads the base
+5003 02B 	add 	j 	add j to base a[j]
+5004 02C 	add 	loadit	add loadit to mem address
+402E 02D 	store 		plants instruction to line below
+0000 02E 	load		loads the number at that memory address
+4006 02F 	store 	num 	store number into num
+3009 030 	load 	base 	loads in the base
+5003 031 	add 	j 	add j to base
+6007 032 	sub 	one 	subtract one to get a[j-1]
+5004 033 	add 	loadit	adds loadit to mem address
+4035 034 	store	loadit	stores loadit in next line
+0000 035 	load 		loads in a[j-1]
+6006 036 	sub 	num 	a[j-1]-a[j]
+E04D 037 			COMPLETE THIS LINE LATER
+D04D 038 			COMPLETE THIS LINE LATER
+3009 039 	load 	base 	loads in base
+5003 03A 	add 	j 	add j
+B000 03B
+B000 03C
+5005 03D 	add 	storeit
+4045 03E 	store 		store at line 45
+3009 03F 	load 	base 	loads the base
+5003 040 	add 	j 	add j to base
+6007 041 	sub 	one 	subtract by one
+5004 042 	add 	loadit  add loadit to address to load a[j-1]
+4044 043 	store 		stores instruction in the next line
+0000 044 	load 		loads a[j-1]
+0000 045 	store 	storeit storeit planted here
+3009 046 	load 	base 	loads the base
+5003 047 	add 	j 	adds j
+6007 048 	sub 	one 	sub one from j to get a[j-1]
+5005 049 	add 	storeit adds the storeit to a[j-1] mem address
+404C 04A 	store 	storeit stores the storeit line 4C
+3006 04B	load	num	loads num
+0000 04C 	store 	num	stores a[j] in a[j-1]
+3003 04D 	load 	j 	loads j
+6007 04E 	sub 	one 	subtract 1
+4003 04F 	store 	j 	store j-1
+B000 050
+B000 051
+B000 052
+B000 053
+B000 054
+3002 055 	load 	i 	loads i
+6003 056 	sub 	j 	subtracts j
+E02A 057 jmp 		loop 	if i-j negative then j>i goto top of jLoop
+D022 058 jmp 		loop 	if i-j = 0 then i=j go to iLoop
+B000 059
+B000 05A
+3008 05B  	load 	zero 	loads zero
+4002 05C 	store 	i 	store i as 0
+3009 05D 	load 	base 	loads the base
+5002 05E 	add 	i 	add i to base
+5004 05F 	add 	loadit  add loadit to memaddress
+4061 060 	store 		plants instruction in next line
+0000 061 	load 		loads the num at mem address
+1800 062 	print 		prints the number
+3002 063 	load 	i 	loads i into accumulator
+5007 064 	add 	one 	add one to i
+4002 065 	store 	i 	store i+1
+3002 066 	load 	i 	loads i
+6001 067 	sub 	size 	i-size
+E05D 068 jmp 		loop 	if i-size is negative
+0000 069 halt

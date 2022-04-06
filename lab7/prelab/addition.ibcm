@@ -1,0 +1,39 @@
+C00A 000	jmp	start	skip around the variables
+0000 001 num1
+0000 002 num2
+0000 003 num3
+0000 004 sum
+0000 005 zero
+0000 006
+0000 007
+0000 008
+0000 009
+1000 00A start	readnum		
+4001 00B store			stores into num1
+1000 00C 	readnum
+4002 00D store			stores into num2
+1000 00E 	readnum
+4003 00F store			stores into num3
+3001 010 load			loads num1
+5004 011 add			adds num1 to sum
+4004 012 store			stores sum into sum
+3002 013 load			loads num2
+5004 014 add 			adds num2 to sum
+4004 015 store 			stores sum into sum
+3003 016 load			loads num3
+5004 017 add 			adds num3 to sum
+4004 018 store 			stores sum into sum
+3004 019 load 			loads sum
+1800 01A print 			prints sum
+3004 01B load 			loads sum
+D020 01C jmp			jump to line * if sum == 0
+3005 01D load 			loads zero
+4004 01E store 			stores zero into sum
+C00A 01F jump 			jumps to start
+3001 020 load 			loads num1
+1800 021 print 			prints num1
+3002 022 load 			loads num2
+1800 023 print 			prints num2
+3003 024 load 			loads num3
+1800 025 print 			prints num3
+0000 026 halt

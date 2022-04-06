@@ -1,0 +1,23 @@
+B000 000
+C008 001	jmp	start	skip around the variables
+0016 002 size	      		size of loop
+0001 003 one			constant 1
+0000 004 zero 			constant 0
+0000 005 i			iterator i
+3000 006 loadit 		load variable
+B000 007
+3004 008	load	0	loads 0
+4005 009	store	i	store i as zero so loop prints correctly 
+3006 00A	load	loadit	loads the load variable
+5005 00B 	add	i 	adds i to loadit
+400D 00C 	store		stores into next line
+0000 00D 	load 		loads the command
+1800 00E 	print 		prints the line loaded
+3005 00F 	load 	i 	loads i
+5003 010 	add 	one 	add i by one
+4005 011 	store 	i	store i+1 into i
+3002 012 	load 	size 	load size
+6005 013 	sub 	i	subtract i from size
+E016 014 	jmp 	a<0	if a is less than zero exit
+C00A 015	jmp		jump to load
+0000 016 halt

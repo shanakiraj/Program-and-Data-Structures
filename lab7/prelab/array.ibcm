@@ -1,0 +1,63 @@
+C00A 000	jmp	start	skip around the variables
+0000 001 i 			iterator i
+0000 002 s			size of array
+0000 003 s2 			extra size holder
+0000 004 num 		        number value in array
+3000 005 loadit 		loadit variable
+4000 006 storeit 		storeit variable
+0000 007 zero			constant 0
+0001 008 one 			constant 1
+0062 009 base			base address of 62	
+1000 00A start 	readH	read array size
+B000 00B
+4002 00C 	store	s	store array size
+B000 00D
+3002 00E 	load 	s	loads array size
+B000 00F
+4003 010 	store 	s2	stores array size in extra variable
+B000 011
+B000 012
+B000 013
+1000 014 		readH	read the number to be stored in the array
+4004 015 	store 	num 	stores num read in from user
+B000 016
+B000 017
+B000 018
+3006 019 	load 	storeit loads the storeit in the accumulator
+5009 01A 	add 	base 	adds base to storeit
+5001 01B 	add	i 	adds i to storeit
+401E 01C 	store	storeit plant the instruction to store num to address
+3004 01D 	load	num	loads num
+0000 01E doit			stores num in the storeit address
+3001 01F 	load 	i 	loads i into accumulator
+5008 020 	add	one 	i+1
+4001 021 	store	i 	store i+1 into i	
+6002 022 	sub	size 	i-size
+E014 023	jmp	loop	goto start if i<size
+3007 024 	load	zero 	loads zero into accumulator
+4001 025 	store 	zero 	sets i equal to 0
+3009 026   	load 	base 	loads base into accumulator	
+5001 027 	add 	i 	adds i to base
+5005 028 	add 	loadit  accumulator should be 3000+arrayindex 
+402A 029    	store  storeit  plants the instruction to load the memory address
+0000 02A   	doit	load 	loads the number at mem address
+1800 02B 	print  	prints number at memory address
+3001 02C 	load 	i 	loads i into accumulator
+5008 02D 	add 	one 	i+1
+4001 02E 	store 	i 	store i+1
+6002 02F 	sub 	size	i-size
+E026 030	jmp 	loop 	goto 26 if i<size
+3009 031 	load 	base 	loads base into accumulator
+6008 032      	sub	one 	subtracts one from base
+5001 033 	add 	i 	adds i to base
+5005 034 	add 	loadit	accumulator should be 3000+arrayindex
+4036 035 	store 	storeit plants instruction to load memory address
+0000 036 	doit 	load	loads the num at mem address
+1800 037 	print  	prints number at mem address
+3001 038 	load 	i 	loads i into accumulator
+6008 039 	sub 	1 	subtract 1 from i
+4001 03A 	store 	i 	store i-1
+3007 03B 	load 	zero 	loads zero into accumulator
+6001 03C 	sub 	i 	0-i
+E031 03D 	jmp 	loop 	goto 34 if i>0 
+0000 03E 	halt 		
